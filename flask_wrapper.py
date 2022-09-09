@@ -17,6 +17,7 @@ class FlaskNgrok(object):
         return decorator
 
     def run(self, port=5000):
+        self.shut_down_all_tunnels()
         ngrok.set_auth_token(os.environ["NGROK_AUTH_TOKEN"])
         self.url = ngrok.connect(port).public_url
         self.app.run()
