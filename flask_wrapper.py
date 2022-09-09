@@ -21,6 +21,10 @@ class FlaskNgrok(object):
         self.url = ngrok.connect(port).public_url
         self.app.run()
 
+    def shut_down_all_tunnels(self):
+        tunnels = ngrok.get_tunnels()
+        for t in tunnels:
+            ngrok.disconnect(t.public_url)
 # class EndPointAction(object):
 #     def __init__(self, action):
 #         self.action = action
